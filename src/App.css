@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+margin: 20px;
 }
 
 .App-logo {
@@ -7,32 +7,43 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.input-group {
+	margin-top:10px;
+	display:flex;
+	flex-wrap:wrap;
+}
+label, input, select{
+	flex-basis:150px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.accessToken :not(button){
+	display: inline-flex;
+	overflow-x:hidden;
+	max-width:600px;
+	overflow-wrap:anywhere;
+	font-size:.4em;
+	overflow-y: scroll;
+	max-height:30px;
 }
 
-.App-link {
-  color: #61dafb;
+.copyButton{
+	padding:2px;
+}
+.error {
+	font-weight:bold;
+	color:red;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.result {
+	display: flex;
+	flex-direction:row;
+	justify-content: start;
+	align-items: flex-start;
+}
+
+.result-section {
+	width:250px;
+}
+.result-time{
+	width:80px;
 }
