@@ -19,6 +19,7 @@ const jsonDisplayDefaultProps = {
 enum AuthProvider {
   UserPassword = 'username/password',
   Anonymous = 'anonymous',
+  APIKey = 'apikey',
 }
 
 const LOCAL_STORAGE_KEY = 'stitchutils_app';
@@ -31,6 +32,7 @@ type PersistedAppConfig = {
 function App() {
   const [baseURL, setBaseURL] = useState<string>('https://realm.mongodb.com');
   const [appID, setAppID] = useState<string>('');
+  const [apiKey, setApiKey] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loginError, setLoginError] = useState<string>('');
@@ -52,6 +54,8 @@ function App() {
     let credentials;
     if (authProvider === AuthProvider.Anonymous) {
       credentials = Realm.Credentials.anonymous();
+    } else if (authProvider === AuthProvider.APIKey) {
+      credentials = Realm.Credentials.userApiKey(apiKey);
     } else if (authProvider === AuthProvider.UserPassword) {
       credentials = Realm.Credentials.emailPassword(username, password);
     } else {
@@ -146,13 +150,27 @@ function App() {
             <select
               onChange={e => setAuthProvider(e.target.value as AuthProvider)}
               value={authProvider}>
-              {[AuthProvider.UserPassword, AuthProvider.Anonymous].map(b => (
+              {[
+                AuthProvider.UserPassword,
+                AuthProvider.Anonymous,
+                AuthProvider.APIKey,
+              ].map(b => (
                 <option value={b} key={b}>
                   {b}
                 </option>
               ))}
             </select>
           </div>
+          {authProvider === AuthProvider.APIKey && (
+            <div className="input-group">
+              <label>API Key</label>
+              <input
+                type="text"
+                onChange={e => setApiKey(e.target.value)}
+                value={apiKey}
+              />
+            </div>
+          )}
           {authProvider === AuthProvider.UserPassword && (
             <div className="input-group">
               <label>Username</label>
