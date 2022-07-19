@@ -37,7 +37,7 @@ label, input, select{
 .result {
 	display: flex;
 	flex-direction:row;
-	justify-content: start;
+	justify-content: flex-start;
 	align-items: flex-start;
 }
 
@@ -46,4 +46,28 @@ label, input, select{
 }
 .result-time{
 	width:80px;
+}
+
+
+.pill-nav .pill-item {
+  cursor:pointer;
+  display: inline-block;
+  color: black;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 5px;
+}
+
+/* Change the color of links on mouse-over */
+.pill-nav .pill-item:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.pill-nav .pill-item.active {
+  background-color: dodgerblue;
+  color: white;
 }

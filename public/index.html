@@ -3,6 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <script src="/wasm_exec.js"></script>
+
+    <script>
+      (async function loadAndRunGoWasm() {
+        const go = new Go();
+        const response = await fetch('/test.wasm');
+        const buffer = await response.arrayBuffer();
+        const result = await WebAssembly.instantiate(buffer, go.importObject);
+        go.run(result.instance);
+      })();
+		token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiYWFzX2RldmljZV9pZCI6IjYyNDhmOWVmYjI3MTQ3NDc4NDUwNmM3ZiIsImJhYXNfZG9tYWluX2lkIjoiNjI0OGQ1ZDg1YzdiZDVlM2NkN2MzNzNkIiwiZXhwIjoxNjQ4OTUxNTQzLCJpYXQiOjE2NDg5NDk3NDMsImlzcyI6IjYyNDhmOWVmYjI3MTQ3NDc4NDUwNmM4MCIsInN0aXRjaF9kZXZJZCI6IjYyNDhmOWVmYjI3MTQ3NDc4NDUwNmM3ZiIsInN0aXRjaF9kb21haW5JZCI6IjYyNDhkNWQ4NWM3YmQ1ZTNjZDdjMzczZCIsInN1YiI6IjYyNDhmOWVmYjI3MTQ3NDc4NDUwNmM3YyIsInR5cCI6ImFjY2VzcyJ9.ucma4cfig2PsNeel8BlPo6A2xPT-k3XB3rT7DtpGrWM'
+		ws = new WebSocket("ws://localhost:8080/api/client/v2.0/app/pbstestapp-dflbe/realm-sync?baas_at=" + token, "com.mongodb.realm-syncX3"); ws.onmessage = function(data){console.log("got"); return false};ws.onerror=function(e){console.log("err", e)};
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
