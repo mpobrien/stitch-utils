@@ -8,6 +8,8 @@ import {Tabs, Tab} from '@leafygreen-ui/tabs';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import * as Realm from 'realm-web';
 import copy from './copy.png';
+import ChangesetDecoder from './ChangesetDecoder';
+import ChangesetEncoder from './ChangesetEncoder';
 
 const LOCAL_STORAGE_KEY = 'stitchutils_app';
 
@@ -50,6 +52,8 @@ function App() {
     FuncRunner,
     Lookup,
     RQLToMQL,
+    ChangesetDecoder,
+    ChangesetEncoder,
   }
 
   const [selected, setSelected] = useState(0);
@@ -126,6 +130,12 @@ function App() {
             </Tab>
             <Tab name="Convert RQL to MQL">
               <RQLConvert />
+            </Tab>
+            <Tab name="Changeset Decoder">
+              <ChangesetDecoder />
+            </Tab>
+            <Tab name="Changeset Encoder">
+              <ChangesetEncoder />
             </Tab>
           </Tabs>
         </div>
